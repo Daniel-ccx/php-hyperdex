@@ -21,7 +21,7 @@ Installing/Configuring
 
 <pre>
 phpize
-./configure --enable-hyperdex
+./configure --enable-hyperdex --with-php-config=/path/to/php-config
 make
 make install
 </pre>
@@ -102,14 +102,33 @@ Int    HyperdexAdmin::error_code( )
 Boolean HyperdexAdmin::loop( )
 
 
-Example:
+$host = '127.0.0.1';
+
+$port = 1982;
+
+Example for HyperdexAdmin:
+===========
+
+$hda = new HyperdexAdmin( $host, $port );
+
+$description = 'space phonebook1
+key username
+attributes first, last, int phonenum
+subspace first, last, phonenum
+create 8 partitions
+tolerate 2 failures';
+
+$ret = $hda->add_space( $description );
+
+$spaces = $hda->list_spaces();
+
+Example for HyperdexClient:
 =========
 
-$hdp = new HyperdexClient('127.0.0.1', 1982);
+$hdp = new HyperdexClient($host, $port);
 
 $val = $hdp->put( 'phonebook','jsmith1', array( 'first' => 'Brad', 'last' => 'Broerman', 'phone' => 123456 ) );
 
 $val = $hdp->get( 'phonebook','jsmith1' );
 
 var_dump( $val );
-
