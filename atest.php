@@ -75,7 +75,8 @@ function config_parser($config)
 
 $adm = new HyperdexAdmin('10.207.0.225', 1982);
 var_dump($adm);
-$ret = $adm->add_space('haha');
+//请参照下文的add_space
+//$ret = $adm->add_space('haha');
 var_dump($ret);
 $return_value = array();
 $ret = $adm->list_spaces();
